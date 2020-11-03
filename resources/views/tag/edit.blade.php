@@ -19,11 +19,11 @@
                     value="{{ $tag->title }}"
                     type="text"
                 >
-                @if ($errors->has('title'))
+                @error('title')
                     <div class="text-danger">
-                        {{ $errors->first('title') }}
+                        {{$message}}
                     </div>
-                @endif
+                @enderror
             </div>
             
             <div class="mt-5">

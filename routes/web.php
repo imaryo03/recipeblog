@@ -43,6 +43,10 @@ Route::group(['middleware' => 'auth'],function(){
     // ブログ削除
     Route::post('/blog/delete/{id}', 'BlogController@delete')->name('blog.delete');
 
+    //  レシピ検索
+    Route::post('/blog/search', 'BlogController@search')->name('blog.search');
+
+
   // タグルーティング
 
     Route::get('/tag', 'TagController@index')->name('tag.index');

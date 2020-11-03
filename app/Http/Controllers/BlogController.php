@@ -17,8 +17,15 @@ class BlogController extends Controller
      */
     public function index(){
         $user_id = Auth::id();
-        $blogs = User::find($user_id)->blogs()->paginate(10);
+        $blogs = User::find($user_id)->blogs()->orderBy('id','desc')->paginate(10);
         return view('blog.list',['blogs' => $blogs]);
+    }
+
+    // レシピ検索する
+    public function search(Request $request){
+        $blogs = Blog::where('title', $request->input)->paginate(10);
+        return view('blog.list',['blogs' => $blogs]);
+        
     }
 
     /**

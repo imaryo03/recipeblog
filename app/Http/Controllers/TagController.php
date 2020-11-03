@@ -16,7 +16,7 @@ class TagController extends Controller
      */
     public function index(){
         $user_id = Auth::id();
-        $tags = User::find($user_id)->tags()->paginate(10);
+        $tags = User::find($user_id)->tags()->orderBy('id','desc')->paginate(10);
         return view('tag.list',['tags' => $tags]);
     }
 

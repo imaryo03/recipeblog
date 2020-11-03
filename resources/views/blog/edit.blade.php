@@ -19,12 +19,13 @@
                     value="{{ $blog->title }}"
                     type="text"
                 >
-                @if ($errors->has('title'))
+                @error('title')
                     <div class="text-danger">
-                        {{ $errors->first('title') }}
+                        {{$message}}
                     </div>
-                @endif
+                @enderror
             </div>
+            
             <div class="form-group">
                 <label for="content">
                     レシピ説明
@@ -35,11 +36,11 @@
                     class="form-control"
                     rows="4"
                 >{{ $blog->content}}</textarea>
-                @if ($errors->has('content'))
+                @error('content')
                     <div class="text-danger">
-                        {{ $errors->first('content') }}
+                        {{$message}}
                     </div>
-                @endif
+                @enderror
             </div>
             <div class="form-group">
                 <label for="inputTag">

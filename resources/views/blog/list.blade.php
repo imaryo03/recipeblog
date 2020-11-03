@@ -2,13 +2,22 @@
 @section('title','ブログ一覧')
 @section('content')
 
+
+    <div>
+     <h2>レシピ検索</h2>
+     <form action="{{route('blog.search')}}" method="POST">
+         @csrf
+         <input type="text" name="input" value="{{old('input')}}">
+         <input type="submit" value="find">
+     </form>
+
+    </div>
     <div class="row">
       <div class="col-md-10 col-md-offset-2">
           <h2>ブログ記事一覧</h2>
           @if(session('err_msg'))
             <p class="text-danger">
                 {{session('err_msg')}}
-
             </p>
           @endif
 
@@ -38,7 +47,7 @@
               </tr>
               @endforeach   
           </table>
-          {{$blogs->links()}}
+          <!-- {{$blogs->links()}} -->
       </div>
     </div>
     <script>
