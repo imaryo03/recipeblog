@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\Tag;
 use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {

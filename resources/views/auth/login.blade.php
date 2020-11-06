@@ -65,6 +65,13 @@
                             </div>
                         </div>
                     </form>
+                    <div class="form-group row mt-5">
+                        <label for="name" class="col-sm-4 col-form-label text-md-right">SNSログイン</label>
+                        <div class="col-md-6">
+                            <a href="{{ url('login/google')}}" class="btn btn-danger"><i> Google</i></a>
+                            <a href="{{ url('login/github')}}" class="btn btn-secondary"><i> GitHub</i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

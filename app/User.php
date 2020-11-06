@@ -49,6 +49,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Tag');
     }
 
-   
+    function IdentityProviders(){
+        return $this->hasMany(IdentityProvider::class);
+    }
 }
 

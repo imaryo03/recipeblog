@@ -17,7 +17,8 @@ use Illuminate\Routing\RouteGroup;
 
 
 Auth::routes();
-
+Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->where('provider', 'github|google');
+Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->where('provider', 'github|google');
 
 Route::group(['middleware' => 'auth'],function(){
   
@@ -69,3 +70,5 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('/tag/delete/{id}', 'TagController@delete')->name('tag.delete');
     
 });
+
+
