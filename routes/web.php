@@ -17,8 +17,8 @@ use Illuminate\Routing\RouteGroup;
 
 
 Auth::routes();
-Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->where('provider', 'github|google');
-Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->where('provider', 'github|google');
+Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->where('provider', 'twitter|google');
+Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->where('provider', 'twitter|google');
 
 Route::group(['middleware' => 'auth'],function(){
   
@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth'],function(){
     // タグ削除
     Route::post('/tag/delete/{id}', 'TagController@delete')->name('tag.delete');
     
-});
+    Route::get('/blog/tweet/create', 'TweetController@tweetindex')->name('tweet');
 
+    Route::post('/blog/tweet/store/{blog_id}', 'TweetController@tweet')->name('tweet.store');
+});
 

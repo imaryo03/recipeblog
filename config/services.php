@@ -36,5 +36,11 @@ return [
         'redirect' => env('APP_URL').'/login/google/callback',
     ],
     
-
+    'twitter'=>[
+        'client_id'=>env('TWITTER_CLIENT_ID'),
+        'client_secret'=>env('TWITTER_CLIENT_SECRET'),
+        'redirect'=>env('APP_URL').'/login/twitter/callback',
+        'access_token'  => env('TWITTER_ACCESS_TOKEN'),
+        'access_secret' => env('TWITTER_ACCESS_SECRET')
+    ] ,
 ];

@@ -4,6 +4,8 @@
 @section('content')
     <div class="row">
       <div class="col-md-10 col-md-offset-2">
+     
+      {{$blog_id[0]}}
           <h2>タグ一覧</h2>
           @if(session('err_msg'))
             <p class="text-danger">

@@ -37,7 +37,7 @@ class BlogController extends Controller
     public function show($id){
         $blog = Blog::find($id);
         if (is_null($blog)){
-            \Session::flash('err_msg','データがありません');
+            \Session::flash('err_msg','データがありませんyo');
             return redirect(route('blog.index'));
         }
         $tags = $blog->tags()->get();
@@ -73,8 +73,6 @@ class BlogController extends Controller
             $fileName = "";
         }
         
-       
-        
         $blog->fill([
             'user_id'=>$inputs['user_id'],
             'title'=>$inputs['title'],
@@ -82,10 +80,10 @@ class BlogController extends Controller
             'recipe_img'=>$fileName
         ])->save();
         $blog->tags()->sync($request->tags);
-        
-        \Session::flash('err_msg','レシピを登録しました');
-        return redirect(route('blog.index'));
-    
+        $blog_id =[
+            'blog_id_i'=>Blog::find($blog->id)->id
+        ];
+        return redirect(route('tweet'))->withInput($blog_id);
     }
 
      /**
@@ -95,7 +93,7 @@ class BlogController extends Controller
      */
     public function edit($id){
         $user_id = Auth::id();
-        $tags =User::find($user_id)->tags()->get();
+        $tags =User::find($user_id)->tags()->pluck("title", "id");
         $blog = Blog::find($id);
         if (is_null($blog)){
             \Session::flash('err_msg','データがありません');

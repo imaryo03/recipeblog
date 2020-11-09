@@ -14,10 +14,13 @@ class TagController extends Controller
      * タグ一覧表示
      * @return view
      */
-    public function index(){
+    public function index(Request $request){
         $user_id = Auth::id();
         $tags = User::find($user_id)->tags()->orderBy('id','desc')->paginate(10);
-        return view('tag.list',['tags' => $tags]);
+        $blog_id  =[
+           $request->old('blog_id_i'),2
+        ];
+        return view('tag.list',['tags' => $tags, 'blog_id'=>$blog_id]);
     }
 
     /**
@@ -119,6 +122,7 @@ class TagController extends Controller
         if (empty($id)){
             \Session::flash('err_msg','データがありませんne');
             return redirect(route('tag.index'));
+            
         }
         $tag = tag::find($id);
         $tag->blogs()->detach();

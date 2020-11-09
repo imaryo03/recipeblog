@@ -46,17 +46,20 @@
                 <label for="inputTag">
                     タグ
                 </label>
-                @foreach($tags as $tag)
+                @foreach($tags as $key=>$tag)
                     <div class="form-check form-check-inline">
                         <input 
                             type="checkbox"
-                            name="tags"
-                            value="{{$tag->id}}"
-                            id="tag{{$tag->id}}"    
+                            @if (isset($blog -> tags) && $blog->tags->contains($key))
+                            checked
+                            @endif
+                            name="tags[]"
+                            value="{{$key}}"
+                            id="tag{{$key}}"    
                         >
                         
-                        <lavel for="tag{{$tag->id}}" class="form-check-lavel">
-                            {{$tag->title}}
+                        <lavel for="tag{{$key}}" class="form-check-lavel">
+                            {{$tag}}
                         </lavel>
                     </div>
                             

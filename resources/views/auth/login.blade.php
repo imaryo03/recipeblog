@@ -69,7 +69,7 @@
                         <label for="name" class="col-sm-4 col-form-label text-md-right">SNSログイン</label>
                         <div class="col-md-6">
                             <a href="{{ url('login/google')}}" class="btn btn-danger"><i> Google</i></a>
-                            <a href="{{ url('login/github')}}" class="btn btn-secondary"><i> GitHub</i></a>
+                            <a href="{{ url('login/twitter')}}" class="btn btn-secondary"><i> Twitter</i></a>
                         </div>
                     </div>
                 </div>
