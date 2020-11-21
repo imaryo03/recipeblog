@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     // 可変項目
-    protected $fillable =
-    [
+    protected $fillable =[
         'title',
         'content',
         'user_id',
@@ -18,11 +17,15 @@ class Blog extends Model
     protected $with = ['tags'];
 
     public function tags(){
-        return $this->belongsToMany('App\Models\Tag');
+         return $this->belongsToMany('App\Models\Tag');
     }
 
     public function user(){
         return $this->belongsTo('App\User');
     }
 
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
+    }
+    
 }

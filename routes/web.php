@@ -48,6 +48,15 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('/blog/search', 'BlogController@search')->name('blog.search');
 
 
+    // twitter関連
+    Route::get('/blog/tweet/create', 'TweetController@tweetindex')->name('tweet');
+  
+    Route::post('/blog/tweet/store/{blog_id}', 'TweetController@tweet')->name('tweet.store');
+
+    Route::post('/blog/tweet/list/search', 'TweetController@tweetsearch')->name('tweet.search');
+
+    Route::get('/blog/tweet/list', 'TweetController@tweetlist')->name('tweet.list');
+
   // タグルーティング
 
     Route::get('/tag', 'TagController@index')->name('tag.index');
@@ -68,9 +77,17 @@ Route::group(['middleware' => 'auth'],function(){
     
     // タグ削除
     Route::post('/tag/delete/{id}', 'TagController@delete')->name('tag.delete');
-    
-    Route::get('/blog/tweet/create', 'TweetController@tweetindex')->name('tweet');
 
-    Route::post('/blog/tweet/store/{blog_id}', 'TweetController@tweet')->name('tweet.store');
+  // コメントルーティング
+  Route::post('/comment/store', 'CommentController@store')->name('comment.store');
+
+
+
+  Route::get('/rakuten', 'RakutenController@index')->name('rakuten.index');
+  Route::get('/rakuten/recipe', 'RakutenController@recipe')->name('rakuten.recipe');
+  Route::get('/rakuten/recipe/{id}', 'RakutenController@show')->name('rakuten.show');
+  Route::get('/rakuten/blogcreate/{id}', 'RakutenController@create')->name('rakuten.create');
+
+    
 });
 

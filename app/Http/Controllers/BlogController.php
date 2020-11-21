@@ -17,8 +17,7 @@ class BlogController extends Controller
      * @return view
      */
     public function index(){
-        $user_id = Auth::id();
-        $blogs = User::find($user_id)->blogs()->orderBy('id','desc')->paginate(10);
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(10);
         return view('blog.list',['blogs' => $blogs]);
     }
 
@@ -41,7 +40,7 @@ class BlogController extends Controller
             return redirect(route('blog.index'));
         }
         $tags = $blog->tags()->get();
-        return view('blog.detail',['blog' => $blog , 'tags' => $tags]);
+        return view('blog.detail',['blog' => $blog , 'tags' => $tags ]);
     }
 
     /**
@@ -144,10 +143,6 @@ class BlogController extends Controller
         }
         // タグとブログの紐づけ解除
         Blog::find($id)->tags()->detach();
-        // ユーザーとブログの紐づけ解除
-        // $user_id = Auth::id();
-        // User::find($user_id)->blogs()->dissociate()->save();
-
         try{
             // ブログ削除する
             

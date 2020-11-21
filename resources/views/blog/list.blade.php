@@ -1,9 +1,6 @@
 @extends('layout')
 @section('title','ブログ一覧')
 @section('content')
-
-
-
     <div class="row">
       <div class="col-md-10 col-md-offset-2">
           <div class="main_head">
@@ -26,7 +23,7 @@
 
                 @foreach($blogs as $blog)
                 <div class="each_recipe">
-                  <img src="https://placehold.jp/150x100.png" alt="">
+                  <img src="/uploads/{{$blog->recipe_img}}" alt="">
                   <p><a href="{{route('blog.show',$blog->id)}}">{{$blog->title}}</a></p>    
                 </div>
                 

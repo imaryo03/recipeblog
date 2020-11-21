@@ -52,5 +52,7 @@ class User extends Authenticatable
     function IdentityProviders(){
         return $this->hasMany(IdentityProvider::class);
     }
+
+    
 }
 
