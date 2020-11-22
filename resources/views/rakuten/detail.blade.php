@@ -3,7 +3,7 @@
 @section('content')
 
 <a href="{{$item['recipeUrl']}}">{{$item['recipeUrl']}}</a>
-<p></p>
+<img src="{{$item['foodImageUrl']}}" alt="" height="100px" width="100px">
 <p></p>
 <p></p>
 <p></p>

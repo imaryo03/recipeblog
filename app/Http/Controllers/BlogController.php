@@ -24,8 +24,7 @@ class BlogController extends Controller
     // レシピ検索する
     public function search(Request $request){
         $blogs = Blog::where('title', $request->input)->paginate(10);
-        return view('blog.list',['blogs' => $blogs]);
-        
+        return view('blog.list',['blogs' => $blogs]);  
     }
 
     /**
@@ -40,7 +39,8 @@ class BlogController extends Controller
             return redirect(route('blog.index'));
         }
         $tags = $blog->tags()->get();
-        return view('blog.detail',['blog' => $blog , 'tags' => $tags ]);
+        $comments = $blog->comments()->get();
+        return view('blog.detail',['blog' => $blog , 'tags' => $tags , 'comments' => $comments]);
     }
 
     /**

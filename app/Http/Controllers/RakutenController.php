@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\BlogRequest;
+use App\Models\Blog;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -76,5 +77,26 @@ class RakutenController extends Controller
       $tags =User::find($user_id)->tags()->get();
       return view('rakuten.form',['tags'=>$tags, 'user_id'=>$user_id ,'item'=>$item]);
   }
+
+  public function store(BlogRequest $request){
+    // ブログデータ受け取る
+    $blog = new Blog;
+    $inputs = $request->all();    
+    $blog->fill([
+        'user_id'=>$inputs['user_id'],
+        'title'=>$inputs['title'],
+        'content' => $inputs['content'],
+        'recipe_url' => $inputs['recipe_url'],
+        'recipe_cost' => $inputs['recipe_cost'],
+        'recipe_time' => $inputs['recipe_time'],
+        'recipe_img_rakuten'=>$inputs['recipe_img_rakuten']
+    ])->save();
+    $blog->tags()->sync($request->tags);
+    $blog_id =[
+        'blog_id_i'=>Blog::find($blog->id)->id
+    ];
+    return redirect(route('tweet'))->withInput($blog_id);
+}
+
 }
 

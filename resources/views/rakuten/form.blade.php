@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <h2>ブログ投稿フォーム</h2>
-        <form method="POST" action="{{ route('blog.store') }}"  enctype="multipart/form-data"  onSubmit="return checkSubmit()">
+        <form method="POST" action="{{ route('rakuten.store') }}"  enctype="multipart/form-data"  onSubmit="return checkSubmit()">
         @csrf  
             <input type = "hidden" name = "user_id" value="{{$user_id}}">
             <div class="form-group">
@@ -15,7 +15,7 @@
                     id="title"
                     name="title"
                     class="form-control"
-                    value="{{$item['recipeUrl']}}"
+                    value="{{$item['recipeTitle']}}"
                     type="text"
                 >
                 @error('title')
@@ -25,15 +25,16 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="title">
+                <label for="recipe_img_rakuten">
                     レシピ・料理写真
                 </label>
                 <input
-                    id="recipe_img"
-                    name="recipe_img"
-                    type="file"
+                    id="recipe_img_rakuten"
+                    name="recipe_img_rakuten"
+                    type="text"
+                    value="{{$item['foodImageUrl']}}"
                 >
-                @error('recipe_img')
+                @error('recipe_img_rakuten')
                     <div class="text-danger">
                         {{$message}}
                     </div>
@@ -74,6 +75,57 @@
                     </div>
                             
                 @endforeach            
+            </div>
+            <div class="form-group">
+                <label for="recipe_url">
+                    レシピURL
+                </label>
+                <input
+                    id="recipe_url"
+                    name="recipe_url"
+                    class="form-control"
+                    value="{{$item['recipeUrl']}}"
+                    type="text"
+                >
+                @error('recipe_url')
+                    <div class="text-danger">
+                        {{$message}}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="recipe_cost">
+                    費用
+                </label>
+                <input
+                    id="recipe_cost"
+                    name="recipe_cost"
+                    class="form-control"
+                    value="{{$item['recipeCost']}}"
+                    type="text"
+                >
+                @error('recipe_cost')
+                    <div class="text-danger">
+                        {{$message}}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="recipe_time">
+                    かかる時間
+                </label>
+                <input
+                    id="recipe_time"
+                    name="recipe_time"
+                    class="form-control"
+                    value="{{$item['recipeIndication']}}"
+                    type="text"
+                >
+                @error('recipe_time')
+                    <div class="text-danger">
+                        {{$message}}
+                    </div>
+                @enderror
             </div>
             <div class="mt-5">
                 <a class="btn btn-secondary" href="{{ route('blog.index') }}">

@@ -11,7 +11,11 @@ class Blog extends Model
         'title',
         'content',
         'user_id',
-        'recipe_img'
+        'recipe_img',
+        'recipe_url',
+        'recipe_cost',
+        'recipe_time',
+        'recipe_img_rakuten'
     ];
 
     protected $with = ['tags'];

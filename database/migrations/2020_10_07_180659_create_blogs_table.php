@@ -22,7 +22,11 @@ class CreateBlogsTable extends Migration
                 $table->integer('user_id');
                 $table->string('title',100);
                 $table->text('content');
-                $table->string('recipe_img');
+                $table->string('recipe_img')->nullable();
+                $table->string('recipe_img_rakuten')->nullable();
+                $table->string('recipe_url')->nullable();
+                $table->string('recipe_cost')->nullable();
+                $table->string('recipe_time')->nullable();
                 $table->timestamps();
             });
         }

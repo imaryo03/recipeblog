@@ -87,6 +87,7 @@ Route::group(['middleware' => 'auth'],function(){
   Route::get('/rakuten/recipe', 'RakutenController@recipe')->name('rakuten.recipe');
   Route::get('/rakuten/recipe/{id}', 'RakutenController@show')->name('rakuten.show');
   Route::get('/rakuten/blogcreate/{id}', 'RakutenController@create')->name('rakuten.create');
+  Route::post('/rakuten/store', 'RakutenController@store')->name('rakuten.store');
 
     
 });

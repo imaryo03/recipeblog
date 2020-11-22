@@ -23,8 +23,14 @@
 
                 @foreach($blogs as $blog)
                 <div class="each_recipe">
+                @if($blog->recipe_img)
                   <img src="/uploads/{{$blog->recipe_img}}" alt="">
-                  <p><a href="{{route('blog.show',$blog->id)}}">{{$blog->title}}</a></p>    
+                @endif
+                @if($blog->recipe_img_rakuten)
+                  <img src="{{$blog->recipe_img_rakuten}}" alt="" >
+                @endif
+                  <p><a href="{{route('blog.show',$blog->id)}}">{{$blog->title}}</a></p>
+                  <p>コメント{{$blog->comments->count()}}件</p>    
                 </div>
                 
                 @endforeach   
