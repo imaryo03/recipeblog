@@ -13,7 +13,7 @@
                 </tr>
                 @foreach($items as $item)
                 <tr>
-                    <td><a href="{{route('rakuten.show',$loop->index)}}">{{$item['recipeTitle']}}</a><td>
+                    <td><a href="{{route('rakuten.show',['recipeid'=>$recipeid,'id'=>$loop->index])}}">{{$item['recipeTitle']}}</a><td>
                     <td>{{$item['nickname']}}</td>
                     <td>{{$item['recipeIndication']}}</td>
                     <td>{{$loop->index}}</td>

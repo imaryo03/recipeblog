@@ -12,10 +12,7 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
-    /**
-     * ブログ一覧表示
-     * @return view
-     */
+    // レシピ一覧表示
     public function index(){
         $blogs = Blog::orderBy('created_at', 'desc')->paginate(10);
         return view('blog.list',['blogs' => $blogs]);
@@ -27,11 +24,14 @@ class BlogController extends Controller
         return view('blog.list',['blogs' => $blogs]);  
     }
 
-    /**
-     * ブログ詳細表示
-     * @param int $id
-     * @return view
-     */
+     // 自分のレシピ一覧表示
+     public function mypage(){
+        $user_id = Auth::id();
+        $blogs = User::find($user_id)->blogs()->orderBy('id','desc')->paginate(10);
+        return view('blog.mypage',['blogs' => $blogs]);
+    }
+
+    // レシピ詳細表示
     public function show($id){
         $blog = Blog::find($id);
         if (is_null($blog)){
@@ -43,10 +43,7 @@ class BlogController extends Controller
         return view('blog.detail',['blog' => $blog , 'tags' => $tags , 'comments' => $comments]);
     }
 
-    /**
-     * ブログ登録画面表示
-     * @return view
-     */
+    //レシピ登録画面表示
 
     public function create(){
         $user_id = Auth::id();
@@ -54,20 +51,17 @@ class BlogController extends Controller
         return view('blog.form',['tags'=>$tags, 'user_id'=>$user_id]);
     }
 
-    /**
-     * ブログ登録する
-     * @return view
-     */
+    //レシピ登録する
 
     public function store(BlogRequest $request){
-        // ブログデータ受け取る
+        // レシピデータ受け取る
         $blog = new Blog;
         $inputs = $request->all();
         if($request->hasFile('recipe_img')) {
             $file = $request->recipe_img;
             $fileName = time() . $file->getClientOriginalName();
             $target_path = public_path('uploads/');
-            $file->move($target_path,$fileName);
+            $filefile->move($target_path,$fileName);
         }else{
             $fileName = "";
         }
@@ -85,11 +79,8 @@ class BlogController extends Controller
         return redirect(route('tweet'))->withInput($blog_id);
     }
 
-     /**
-     * ブログ編集フォーム表示
-     * @param int $id
-     * @return view
-     */
+     //レシピ編集フォーム表示
+     
     public function edit($id){
         $user_id = Auth::id();
         $tags =User::find($user_id)->tags()->pluck("title", "id");
@@ -102,17 +93,14 @@ class BlogController extends Controller
     }
 
 
-     /**
-     * ブログ更新する
-     * @return view
-     */
+     //レシピ更新する
 
     public function update(BlogRequest $request){
-        // ブログデータ受け取る
+        // レシピデータ受け取る
         $inputs = $request->all();
         \DB::beginTransaction();
         try{
-            // ブログ更新する
+            // レシピ更新する
             $blog = Blog::find($inputs['id']);
             $blog->fill([
                 'title' => $inputs['title'],
@@ -130,21 +118,18 @@ class BlogController extends Controller
         }
        
 
-    /**
-     * ブログ削除表示
-     * @param int $id
-     * @return view
-     */
+    //レシピ削除表示
+    
     public function delete($id){
 
         if (empty($id)){
             \Session::flash('err_msg','データがありませんne');
             return redirect(route('blog.index'));
         }
-        // タグとブログの紐づけ解除
+        // タグとレシピの紐づけ解除
         Blog::find($id)->tags()->detach();
         try{
-            // ブログ削除する
+            // レシピ削除する
             
             Blog::destroy($id);  
         }catch(\Throwable $e) {

@@ -45,11 +45,11 @@ class TweetController extends Controller{
         $consumer_secret =config('services.twitter.client_secret');
         $access_token =config('services.twitter.access_token');
         $access_token_secret =config('services.twitter.access_secret');
-        //
+        
         $connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
 
 
-        // レシピを投稿する
+    
         $hash_params = ['q' => '#'.$request->input ,'count' => '10', 'lang'=>'ja'];
         $tweets = $connection->get('search/tweets', $hash_params)->statuses;
         

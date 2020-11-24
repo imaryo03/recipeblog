@@ -22,33 +22,35 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCal
 
 Route::group(['middleware' => 'auth'],function(){
   
-  // ブログルーティング
+  // レシピルーティング
   
-    // ブログ一覧を表示
+    // レシピ一覧を表示
     Route::get('/', 'BlogController@index')->name('blog.index');
-    
-    // ブログ登録画面表示
+    // 自分の投稿一覧を表示
+    Route::get('/mypage', 'BlogController@mypage')->name('blog.mypage');
+    // レシピ登録画面表示
     Route::get('/blog/create', 'BlogController@create')->name('blog.create');
     
-    // ブログ登録
+    // レシピ登録
     Route::post('/blog/store', 'BlogController@store')->name('blog.store');
     
-    // ブログ詳細を表示
+    // レシピ詳細を表示
     Route::get('/blog/{id}', 'BlogController@show')->name('blog.show');
     
-    // ブログ編集画面を表示
+    // レシピ編集画面を表示
     Route::get('/blog/edit/{id}', 'BlogController@edit')->name('blog.edit');
     
     Route::post('/blog/update', 'BlogController@update')->name('blog.update');
     
-    // ブログ削除
+    // レシピ削除
     Route::post('/blog/delete/{id}', 'BlogController@delete')->name('blog.delete');
 
     //  レシピ検索
     Route::post('/blog/search', 'BlogController@search')->name('blog.search');
 
 
-    // twitter関連
+
+  // twitter関連
     Route::get('/blog/tweet/create', 'TweetController@tweetindex')->name('tweet');
   
     Route::post('/blog/tweet/store/{blog_id}', 'TweetController@tweet')->name('tweet.store');
@@ -79,15 +81,20 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('/tag/delete/{id}', 'TagController@delete')->name('tag.delete');
 
   // コメントルーティング
-  Route::post('/comment/store', 'CommentController@store')->name('comment.store');
+    Route::post('/comment/store', 'CommentController@store')->name('comment.store');
 
 
-
-  Route::get('/rakuten', 'RakutenController@index')->name('rakuten.index');
-  Route::get('/rakuten/recipe', 'RakutenController@recipe')->name('rakuten.recipe');
-  Route::get('/rakuten/recipe/{id}', 'RakutenController@show')->name('rakuten.show');
-  Route::get('/rakuten/blogcreate/{id}', 'RakutenController@create')->name('rakuten.create');
-  Route::post('/rakuten/store', 'RakutenController@store')->name('rakuten.store');
+  // 楽天レシピAPI関連
+    // カテゴリー一覧取得・表示
+    Route::get('/rakuten', 'RakutenController@index')->name('rakuten.index');
+    // カテゴリーランキング取得・表示
+    Route::get('/rakuten/recipe/{id}', 'RakutenController@recipe')->name('rakuten.recipe');
+    // レシピ詳細表示
+    Route::get('/rakuten/show/{recipeid}/{id}', 'RakutenController@show')->name('rakuten.show');
+    // 楽天レシピからのレシピ投稿表示
+    Route::get('/rakuten/blogcreate/{recipeid}/{id}', 'RakutenController@create')->name('rakuten.create');
+    // 楽天レシピからのレシピ投稿
+    Route::post('/rakuten/store', 'RakutenController@store')->name('rakuten.store');
 
     
 });

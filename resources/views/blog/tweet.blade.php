@@ -1,7 +1,6 @@
 @extends('layout')
 @section('title','tweet投稿')
 @section('content')
-{{$blog_id}}
 <div>
   <form method="POST" action="{{ route('tweet.store',$blog_id)}}" >
 @csrf  

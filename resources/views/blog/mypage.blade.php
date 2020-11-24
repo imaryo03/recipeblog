@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','ブログ一覧')
+@section('title','マイページ')
 @section('content')
     <div class="row">
       <div class="main_inner">
@@ -30,6 +30,25 @@
                   <img src="{{$blog->recipe_img_rakuten}}" alt="" >
                   @endif
                   <div class="each_recipe_text">
+                    <nav class="recipe-navbar navbar navbar-light bg-light">
+                      <button class="recipe-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent{{$blog->id}}" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                        
+                      <div class="collapse recipe-navbar-collapse navbar-collapse justify-content-center" id="navbarSupportedContent{{$blog->id}}">
+                        <ul class="navbar-nav d-flex flex-row">
+                          <li class="recipe_edit">
+                          <form method="POST" action="{{ route('blog.delete',$blog->id) }}" onSubmit="return checkDelete()">
+                          @csrf  
+                            <button type="submit" class="btn btn-primary" onclick=>削除</button>
+                          </form>
+                          </li>
+                          <li class="recipe_edit">
+                          <button type="button" class="btn btn-primary" onclick="location.href='/blog/edit/{{$blog->id}}'">編集</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
                     <p class="each_recipe_title"><a href="{{route('blog.show',$blog->id)}}">{{$blog->title}}</a></p>
                     <p class="each_recipe_comment">コメント{{$blog->comments->count()}}件</p>    
                   </div>

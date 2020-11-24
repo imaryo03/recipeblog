@@ -8,5 +8,5 @@
 <p></p>
 <p></p>
 <p></p>
-<button type="button" class="btn btn-primary" onclick="location.href='/rakuten/blogcreate/{{$id}}'">このレシピを投稿</button>
+<button type="button" class="btn btn-primary" onclick="location.href='/rakuten/blogcreate/{{$recipeid}}/{{$id}}'">このレシピを投稿</button>
 @endsection 

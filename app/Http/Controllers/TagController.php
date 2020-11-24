@@ -10,24 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class TagController extends Controller
 {
-    /**
-     * タグ一覧表示
-     * @return view
-     */
-    public function index(Request $request){
+    //タグ一覧表示
+    public function index(){
         $user_id = Auth::id();
         $tags = User::find($user_id)->tags()->orderBy('id','desc')->paginate(10);
-        $blog_id  =[
-           $request->old('blog_id_i'),2
-        ];
-        return view('tag.list',['tags' => $tags, 'blog_id'=>$blog_id]);
+        return view('tag.list',['tags' => $tags]);
     }
 
-    /**
-     * タグ詳細表示
-     * @param int $id
-     * @return view
-     */
+    //タグ詳細表示
     public function show($id){
         $tag = Tag::find($id);
         if (is_null($tag)){
@@ -38,20 +28,14 @@ class TagController extends Controller
         return view('tag.detail',['tag' => $tag, 'blogs' => $blogs]);
     }
 
-    /**
-     * タグ登録画面表示
-     * @return view
-     */
-
+    // タグ登録画面表示
+    
     public function create(){
         $user_id = Auth::id();
         return view('tag.form', ['user_id'=>$user_id]);
     }
 
-    /**
-     * タグ登録する
-     * @return view
-     */
+    //タグ登録する
 
     public function store(TagRequest $request){
         // タグデータ受け取る
@@ -70,11 +54,8 @@ class TagController extends Controller
         
     }
 
-     /**
-     * タグ編集フォーム表示
-     * @param int $id
-     * @return view
-     */
+     //タグ編集フォーム表示
+    
     public function edit($id){
         $tag = Tag::find($id);
         if (is_null($tag)){
@@ -85,10 +66,7 @@ class TagController extends Controller
     }
 
 
-     /**
-     * タグ更新する
-     * @return view
-     */
+     //タグ更新する
 
     public function update(TagRequest $request){
         // タグデータ受け取る
@@ -112,11 +90,8 @@ class TagController extends Controller
         }
        
 
-    /**
-     * タグ削除表示
-     * @param int $id
-     * @return view
-     */
+    //タグ削除表示
+   
     public function delete($id){
 
         if (empty($id)){

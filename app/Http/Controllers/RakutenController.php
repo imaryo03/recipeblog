@@ -11,13 +11,15 @@ class RakutenController extends Controller
 {
     public function index()
     {
-        $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&categoryType=large&applicationId=1054895675692734268";
-
-        $method = "GET";
-        $client = new Client();
-        $response = $client->request($method, $url);
-        $posts = $response->getBody();
-        $posts = json_decode($posts, true);
+      $applicationID = config('services.rakuten.application_id');
+      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&categoryType=large&applicationId=".$applicationID;
+      
+      
+      $method = "GET";
+      $client = new Client();
+      $response = $client->request($method, $url);
+      $posts = $response->getBody();
+      $posts = json_decode($posts, true);
         
       foreach($posts as $post){
          $items = $post;
@@ -28,8 +30,9 @@ class RakutenController extends Controller
        
     }
 
-    public function recipe(){
-      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&categoryId=10&applicationId=1054895675692734268";
+    public function recipe($recipeid){
+      $applicationID = config('services.rakuten.application_id');
+      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&categoryId=".$recipeid."&applicationId=".$applicationID;
 
       $method = "GET";
       $client = new Client();
@@ -40,11 +43,13 @@ class RakutenController extends Controller
       foreach($posts as $post){
         $items = $post;
      }
-     return view('rakuten.recipe', ['items'=>$items]);
+     return view('rakuten.recipe', ['items'=>$items, 'recipeid'=>$recipeid]);
     }
 
-    public function show($id){
-      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&categoryId=10&applicationId=1054895675692734268";
+    public function show($recipeid,$id){
+      $applicationID = config('services.rakuten.application_id');
+      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&categoryId=".$recipeid."&applicationId=".$applicationID;
+
 
       $method = "GET";
       $client = new Client();
@@ -56,12 +61,13 @@ class RakutenController extends Controller
         $items = $post;
      }
      $item=($items[$id]);
-     return view('rakuten.detail',['item'=>$item , 'id'=>$id]);
+     return view('rakuten.detail',['item'=>$item , 'id'=>$id , 'recipeid'=>$recipeid]);
     }
    
 
-    public function create($id){
-      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&categoryId=10&applicationId=1054895675692734268";
+    public function create($recipeid,$id){
+      $applicationID = config('services.rakuten.application_id');
+      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&categoryId=".$recipeid."&applicationId=".$applicationID;
 
       $method = "GET";
       $client = new Client();

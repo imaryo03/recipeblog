@@ -32,7 +32,7 @@
                         </tr>
                         @foreach($items as $item)
                         <tr>
-                            <td>{{$item['categoryName']}}</td>
+                            <td><a href="{{route('rakuten.recipe',$item['categoryId'])}}">{{$item['categoryName']}}</a><td>
                             <td>{{$item['categoryId']}}</td>
 
                         </tr>
