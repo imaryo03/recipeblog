@@ -1,18 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-class RakutenController extends Controller
+use Illuminate\Http\Request;
+
+class GurunaviController extends Controller
 {
-    public function index()
-    {
-      $applicationID = config('services.rakuten.application_id');
-      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&categoryType=large&applicationId=".$applicationID;
+    public function index() {
+      $url = "https://api.gnavi.co.jp/master/GAreaLargeSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085";
       
       
       $method = "GET";
@@ -20,20 +19,17 @@ class RakutenController extends Controller
       $response = $client->request($method, $url);
       $posts = $response->getBody();
       $posts = json_decode($posts, true);
-      dd($posts);
         
       foreach($posts as $post){
          $items = $post;
       }
-
-      $large_items=($items["large"]);
-      return view('rakuten.index',['items'=>$large_items]);
+      
+      return view('gurunavi.index',['items'=>$items]);
        
     }
 
-    public function recipe($recipeid){
-      $applicationID = config('services.rakuten.application_id');
-      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&categoryId=".$recipeid."&applicationId=".$applicationID;
+    public function shop($areacode){
+      $url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085&areacode_l=".$areacode;
 
       $method = "GET";
       $client = new Client();
@@ -44,14 +40,12 @@ class RakutenController extends Controller
       foreach($posts as $post){
         $items = $post;
      }
-     return view('rakuten.recipe', ['items'=>$items, 'recipeid'=>$recipeid]);
+     return view('gurunavi.shoplist', ['items'=>$items, 'areacode'=>$areacode]);
     }
 
-    public function show($recipeid,$id){
-      $applicationID = config('services.rakuten.application_id');
-      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&categoryId=".$recipeid."&applicationId=".$applicationID;
+    public function show($areacode,$id){
 
-
+      $url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085&areacode_l=".$areacode;   
       $method = "GET";
       $client = new Client();
       $response = $client->request($method, $url);
@@ -62,7 +56,7 @@ class RakutenController extends Controller
         $items = $post;
      }
      $item=($items[$id]);
-     return view('rakuten.detail',['item'=>$item , 'id'=>$id , 'recipeid'=>$recipeid]);
+     return view('gurunavi.detail',['item'=>$item , 'id'=>$id , 'areacode'=>$areacode]);
     }
    
 
@@ -105,5 +99,5 @@ class RakutenController extends Controller
     return redirect(route('tweet'))->withInput($blog_id);
 }
 
+    //
 }
-

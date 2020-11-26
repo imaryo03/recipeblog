@@ -1,10 +1,10 @@
 @extends('layout')
-@section('title','タグ一覧')
+@section('title','エリア一覧')
 
 @section('content')
 <div class="row">
       <div class="col-md-10 col-md-offset-2">
-          <h2>カテゴリー一覧</h2>
+          <h2>エリア一覧</h2>
           @if(session('err_msg'))
             <p class="text-danger">
                 {{session('err_msg')}}
@@ -14,14 +14,13 @@
 
           <table class="table table-striped">
               <tr>
-                  <th>タイトル</th>
-                  <th>レシピID</th>
+                  <th>エリア名</th>
               </tr>
               @foreach($items as $item)
               <tr>
-                  <td><a href="{{route('rakuten.recipe',$item['categoryId'])}}">{{$item['categoryName']}}</a></td>
+                  
+                  <td><a href="{{route('gurunavi.shop',$item['areacode_l'])}}">{{$item['areaname_l']}}</a></td>
 
-                  <td>{{$item['categoryId']}}</td>
  
               </tr>
               @endforeach   

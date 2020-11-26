@@ -96,6 +96,12 @@ Route::group(['middleware' => 'auth'],function(){
     // 楽天レシピからのレシピ投稿
     Route::post('/rakuten/store', 'RakutenController@store')->name('rakuten.store');
 
-    
+     // ぐるなびAPI関連
+    // エリア一覧取得・表示
+    Route::get('/gurunavi', 'GurunaviController@index')->name('gurunavi.index');
+    // 店一覧取得・表示
+    Route::get('/gurunavi/shoplist/{id}', 'GurunaviController@shop')->name('gurunavi.shop');
+    // 店詳細表示
+    Route::get('/gurunavi/show/{areacode}/{id}', 'GurunaviController@show')->name('gurunavi.show'); 
 });
 
