@@ -23,14 +23,18 @@
       <div class="right col-md-6 mb-5">
         <table class="mb-5">
             <tbody>
+                @if($blog->recipe_time)
                 <tr>
                     <th>時間</th>
-                    <td>{{$blog->recipe_time}}分</td>
+                    <td>{{$blog->recipe_time}}</td>
                 </tr>
+                @endif
+                @if($blog->recipe_cost)
                 <tr>
                     <th>費用</th>
-                    <td>{{$blog->recipe_cost}}円</td>
+                    <td>{{$blog->recipe_cost}}</td>
                 </tr>
+                @endif
             </tbody>
         </table>
         <form  method="POST" action="{{ route('comment.store') }}">

@@ -20,7 +20,6 @@ class RakutenController extends Controller
       $response = $client->request($method, $url);
       $posts = $response->getBody();
       $posts = json_decode($posts, true);
-      dd($posts);
         
       foreach($posts as $post){
          $items = $post;
@@ -62,6 +61,7 @@ class RakutenController extends Controller
         $items = $post;
      }
      $item=($items[$id]);
+     
      return view('rakuten.detail',['item'=>$item , 'id'=>$id , 'recipeid'=>$recipeid]);
     }
    

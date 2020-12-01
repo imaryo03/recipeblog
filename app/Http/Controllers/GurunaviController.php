@@ -60,10 +60,8 @@ class GurunaviController extends Controller
     }
    
 
-    public function create($recipeid,$id){
-      $applicationID = config('services.rakuten.application_id');
-      $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&categoryId=".$recipeid."&applicationId=".$applicationID;
-
+    public function create($areacode,$id){
+      $url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085&areacode_l=".$areacode;
       $method = "GET";
       $client = new Client();
       $response = $client->request($method, $url);
@@ -76,7 +74,8 @@ class GurunaviController extends Controller
 
       $user_id = Auth::id();
       $tags =User::find($user_id)->tags()->get();
-      return view('rakuten.form',['tags'=>$tags, 'user_id'=>$user_id ,'item'=>$item]);
+
+      return view('gurunavi.form',['tags'=>$tags, 'user_id'=>$user_id ,'item'=>$item]);
   }
 
   public function store(BlogRequest $request){
@@ -88,9 +87,7 @@ class GurunaviController extends Controller
         'title'=>$inputs['title'],
         'content' => $inputs['content'],
         'recipe_url' => $inputs['recipe_url'],
-        'recipe_cost' => $inputs['recipe_cost'],
-        'recipe_time' => $inputs['recipe_time'],
-        'recipe_img_rakuten'=>$inputs['recipe_img_rakuten']
+        'recipe_img_rakuten'=>$inputs['recipe_img_gurunavi']
     ])->save();
     $blog->tags()->sync($request->tags);
     $blog_id =[

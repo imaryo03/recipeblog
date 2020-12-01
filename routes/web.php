@@ -87,21 +87,34 @@ Route::group(['middleware' => 'auth'],function(){
   // 楽天レシピAPI関連
     // カテゴリー一覧取得・表示
     Route::get('/rakuten', 'RakutenController@index')->name('rakuten.index');
+    
     // カテゴリーランキング取得・表示
     Route::get('/rakuten/recipe/{id}', 'RakutenController@recipe')->name('rakuten.recipe');
+    
     // レシピ詳細表示
     Route::get('/rakuten/show/{recipeid}/{id}', 'RakutenController@show')->name('rakuten.show');
+    
     // 楽天レシピからのレシピ投稿表示
     Route::get('/rakuten/blogcreate/{recipeid}/{id}', 'RakutenController@create')->name('rakuten.create');
+    
     // 楽天レシピからのレシピ投稿
     Route::post('/rakuten/store', 'RakutenController@store')->name('rakuten.store');
 
-     // ぐるなびAPI関連
+  // ぐるなびAPI関連
     // エリア一覧取得・表示
     Route::get('/gurunavi', 'GurunaviController@index')->name('gurunavi.index');
+    
     // 店一覧取得・表示
     Route::get('/gurunavi/shoplist/{id}', 'GurunaviController@shop')->name('gurunavi.shop');
+    
     // 店詳細表示
     Route::get('/gurunavi/show/{areacode}/{id}', 'GurunaviController@show')->name('gurunavi.show'); 
+    
+    // ぐるなびからのレシピ投稿表示
+     Route::get('/gurunavi/blogcreate/{areacode}/{id}', 'GurunaviController@create')->name('gurunavi.create');
+    
+    // 楽天レシピからのレシピ投稿
+     Route::post('/gurunavi/store', 'GurunaviController@store')->name('gurunavi.store');
+ 
 });
 

@@ -28,7 +28,6 @@
               </tr>
               @endforeach   
           </table>
-          {{$tags->links()}}
       </div>
     </div>
     @endsection    
