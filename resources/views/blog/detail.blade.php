@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title','ブログ詳細')
 @section('content')
-    <div lass="row detail">
+    <div class="detail">
       <div class="left pl-0 col-md-8 col-md-offset-2">
         <h1 class="title">{{$blog->title}} </h1>
         @foreach($tags as $tag)   
@@ -46,7 +46,7 @@
                value="{{ $blog->id }}"
             >
     
-            <div class="form-group">
+            <div class="form-group" style="width: 230px;">
                 <label for="name">
                 コメント
                 </label>
@@ -65,7 +65,7 @@
                 @endif
             </div>
     
-            <div class="form-group">
+            <div class="form-group" style="width: 230px;">
                 <textarea
                     id="comment"
                     name="comment"

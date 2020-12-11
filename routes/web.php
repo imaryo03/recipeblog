@@ -105,15 +105,15 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('/gurunavi', 'GurunaviController@index')->name('gurunavi.index');
     
     // 店一覧取得・表示
-    Route::get('/gurunavi/shoplist/{id}', 'GurunaviController@shop')->name('gurunavi.shop');
+    Route::get('/gurunavi/shoplist/{id}/{page_id}', 'GurunaviController@shop')->name('gurunavi.shop');
     
     // 店詳細表示
-    Route::get('/gurunavi/show/{areacode}/{id}', 'GurunaviController@show')->name('gurunavi.show'); 
+    Route::get('/gurunavi/show/{areacode}/{page_id}/{id}', 'GurunaviController@show')->name('gurunavi.show'); 
     
     // ぐるなびからのレシピ投稿表示
-     Route::get('/gurunavi/blogcreate/{areacode}/{id}', 'GurunaviController@create')->name('gurunavi.create');
+     Route::get('/gurunavi/blogcreate/{areacode}/{page_id}/{id}', 'GurunaviController@create')->name('gurunavi.create');
     
-    // 楽天レシピからのレシピ投稿
+    // ぐるなびからのレシピ投稿
      Route::post('/gurunavi/store', 'GurunaviController@store')->name('gurunavi.store');
  
 });

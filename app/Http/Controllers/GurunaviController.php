@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 class GurunaviController extends Controller
 {
     public function index() {
-      $url = "https://api.gnavi.co.jp/master/GAreaLargeSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085";
+      $gurunavi_key=config('services.gurunavi.application_id');
+      $url = "https://api.gnavi.co.jp/master/GAreaLargeSearchAPI/v3/?keyid=".$gurunavi_key;
       
       
       $method = "GET";
@@ -28,8 +29,9 @@ class GurunaviController extends Controller
        
     }
 
-    public function shop($areacode){
-      $url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085&areacode_l=".$areacode;
+    public function shop($areacode,$page_id){
+    
+      $url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085&areacode_l=".$areacode."&hit_per_page=20&offset_page=".$page_id;
 
       $method = "GET";
       $client = new Client();
@@ -40,12 +42,16 @@ class GurunaviController extends Controller
       foreach($posts as $post){
         $items = $post;
      }
-     return view('gurunavi.shoplist', ['items'=>$items, 'areacode'=>$areacode]);
+    
+     $page_prev=$posts["page_offset"]-1;
+     $page_next=$posts["page_offset"]+1;
+     return view('gurunavi.shoplist', ['items'=>$items, 'areacode'=>$areacode, 'page_prev'=>$page_prev,'page_next'=>$page_next ,
+     'page_id'=>$page_id]);
     }
 
-    public function show($areacode,$id){
+    public function show($areacode,$page_id,$id){
 
-      $url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085&areacode_l=".$areacode;   
+      $url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085&areacode_l=".$areacode."&hit_per_page=20&offset_page=".$page_id;   
       $method = "GET";
       $client = new Client();
       $response = $client->request($method, $url);
@@ -56,12 +62,12 @@ class GurunaviController extends Controller
         $items = $post;
      }
      $item=($items[$id]);
-     return view('gurunavi.detail',['item'=>$item , 'id'=>$id , 'areacode'=>$areacode]);
+     return view('gurunavi.detail',['item'=>$item , 'id'=>$id , 'areacode'=>$areacode,'page_id'=>$page_id]);
     }
    
 
-    public function create($areacode,$id){
-      $url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085&areacode_l=".$areacode;
+    public function create($areacode,$page_id,$id){
+      $url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=9d9012f889732b9640d05c0e48b7f085&areacode_l=".$areacode."&hit_per_page=20&offset_page=".$page_id;
       $method = "GET";
       $client = new Client();
       $response = $client->request($method, $url);

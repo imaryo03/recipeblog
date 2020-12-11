@@ -47,4 +47,8 @@ return [
     'rakuten' => [
         'application_id' => env('RAKUTEN_APPLICATION_ID'),
     ],
+
+    'gurunavi' => [
+        'application_id' => env('GURUNAVI_APPLICATION_ID'),
+    ],
 ];

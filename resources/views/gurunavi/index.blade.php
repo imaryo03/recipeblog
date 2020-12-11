@@ -19,7 +19,7 @@
               @foreach($items as $item)
               <tr>
                   
-                  <td><a href="{{route('gurunavi.shop',$item['areacode_l'])}}">{{$item['areaname_l']}}</a></td>
+                  <td><a href="{{route('gurunavi.shop',['id'=>$item['areacode_l'], 'page_id'=>1])}}">{{$item['areaname_l']}}</a></td>
 
  
               </tr>

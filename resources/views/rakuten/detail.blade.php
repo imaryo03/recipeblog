@@ -1,16 +1,10 @@
 @extends('layout')
 @section('title','レシピ詳細')
 @section('content')
-    <div lass="row detail">
+    <div class="detail">
       <div class="left pl-0 col-md-8 col-md-offset-2">
         <h1 class="title">{{$item['recipeTitle']}} </h1>
           <img class="recipe-img" src="{{$item['foodImageUrl']}}">
-        <div class="recipe-introduce">
-          
-          <div class="recipe-introduce_inner">
-              <!-- <p></p> -->
-          </div>
-        </div>
       </div>
       <div class="right col-md-6 mb-5">
         <table class="mb-5">
@@ -33,5 +27,6 @@
                 </tr>
             </tbody>
         </table>
-<button type="button" class="btn btn-primary" onclick="location.href='/rakuten/blogcreate/{{$recipeid}}/{{$id}}'">このレシピを投稿</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/rakuten/blogcreate/{{$recipeid}}/{{$id}}'">このレシピを投稿</button>
+      </div>  
 @endsection 

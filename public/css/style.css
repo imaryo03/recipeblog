@@ -61,8 +61,6 @@ body{
   text-align: center;
 }
 
-
-
 /* ブログ一覧 */
 
 .main_inner{
@@ -117,10 +115,18 @@ body{
   /* display: inline-block; */
 }
 
+.recipe-img{
+  width:70%;
+  height:240px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
 /* 詳細ページ */
 .detail{
   width: 100%;
   margin: 0 auto;
+  display: flex!important;
 }
 
 .detail .right{
@@ -130,7 +136,7 @@ body{
 }
 
 @media screen and (max-width:768px) { 
-  /*　画面サイズが480pxからはここを読み込む　*/
+  /*画面サイズが480pxからはここを読み込む　*/
   .detail .right {
      width: 100%;
   }
@@ -157,10 +163,6 @@ body{
   margin-bottom: 40px;
 }
 
-/* .detail img{
-  width: 100%;
-} */
-
 .detail .recipe-introduce{
   margin: 50px 0;
 }
@@ -175,10 +177,17 @@ body{
   padding: 10px;
 }
 
-.recipe-img{
-  width:70%;
-  height:240px;
-  object-fit: cover;
-  margin-bottom: 10px;
+
+/* お店一覧 */
+.pagenation{
+  display: flex;
+  justify-content: center;
+  /* width: 200px; */
+  margin:0 auto;
 }
 
+.pagenation a {
+  display: block;
+  padding: 0 10px;
+  margin:20px 0  50px;
+}

@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="/js/app.js" defer></script>
+    <style>
+
+    </style>
 </head>
 <body>
     <header>

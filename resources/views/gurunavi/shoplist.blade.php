@@ -20,7 +20,7 @@
               </tr>
               @foreach($items as $item)
               <tr>
-                  <td><a href="{{route('gurunavi.show',['areacode'=>$areacode,'id'=>$loop->index])}}">{{$item['name']}}</a></td>
+                  <td><a href="{{route('gurunavi.show',['areacode'=>$areacode,'page_id'=>$page_id,'id'=>$loop->index])}}">{{$item['name']}}</a></td>
 
                   <td>{{$item['category']}}</td>
 
@@ -28,6 +28,10 @@
               </tr>
               @endforeach   
           </table>
+          <div class="pagenation">
+            <a href="{{route('gurunavi.shop',['id'=>$areacode, 'page_id'=>$page_prev])}}">前</a>
+            <a href="{{route('gurunavi.shop',['id'=>$areacode, 'page_id'=>$page_next])}}">次</a>
+          </div>
       </div>
     </div>
     @endsection    
